@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Displays a list commits that are ahead on your current branch
+
+git fetch && git log HEAD..origin/$(git rev-parse --abbrev-ref HEAD)

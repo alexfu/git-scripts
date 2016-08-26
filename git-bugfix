@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Creates a new named bugfix branch in the following format: bugfix/xyz
+
+git checkout -b bugfix/$1

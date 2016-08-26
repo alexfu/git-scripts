@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# An alias to easily rename current branch
+
+git branch -m $1
