@@ -11,7 +11,7 @@ strindex() {
   fi
 }
 
-remote_url=$(git remote get-url origin)
+remote_url=$(git remote -v | grep origin | tail -n 1 | cut -d$'\t' -f2 | cut -d' ' -f1)
 
 # Get first occurance of '@' and tail the remote_url at that position
 strindex "$remote_url" "@"
