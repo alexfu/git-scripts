@@ -18,11 +18,12 @@ strindex "$remote_url" "@"
 index=$?+1
 url_tail=${remote_url:index}
 
-# Replace any colons with forward slashes
-browsable_url=$(echo "$url_tail" | sed 's/:/\//g')
+# Replace any colons with forward slashes and convert into an web URL
+browsable_url="http://$(echo "$url_tail" | sed 's/:/\//g')"
 
 # Launch URL
 if [ $(uname) = "Darwin" ]; then
-  open "http://$browsable_url"
-# TODO: Handle linux systems with an else here
+  open $browsable_url
+else
+  xdg-open $browsable_url
 fi
