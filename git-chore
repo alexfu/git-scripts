@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Creates a new named chore branch in the following format: chore/xyz
+# $1 - Name of the branch
+# $2 - Base branch
+
+git checkout -b chore/$1 $2
