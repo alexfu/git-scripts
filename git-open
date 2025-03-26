@@ -1,6 +1,13 @@
 #!/bin/bash
-
-# Opens the current git repo in your browser
+# =============================================================================
+# Description:
+#   Extracts the 'origin' remote URL from the current Git repository,
+#   transforms the SSH-style URL into a browsable HTTP URL, and launches
+#   it in the default web browser.
+#
+# Usage:
+#   git open
+# =============================================================================
 
 strindex() {
   x="${1%%$2*}"
@@ -19,7 +26,7 @@ index=$?+1
 url_tail=${remote_url:index}
 
 # Replace any colons with forward slashes and convert into an web URL
-browsable_url="http://$(echo "$url_tail" | sed 's/:/\//g')"
+browsable_url="https://$(echo "$url_tail" | sed 's/:/\//g')"
 
 # Launch URL
 if [ $(uname) = "Darwin" ]; then
