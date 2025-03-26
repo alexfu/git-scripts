@@ -1,4 +1,20 @@
 #!/bin/bash
+# =============================================================================
+# Description:
+#   Automates the process of creating a temporary worktree, cherry-picking a
+#   specified commit onto a new branch, pushing that branch to the remote,
+#   and then opening a pull request.
+#
+# Usage:
+#   git pr-from-commit <commit> [<base branch>]
+#
+#   - <commit>: The commit hash you want to cherry-pick.
+#   - <base branch>: The branch to base your new branch on (defaults to "main").
+#
+# Notes:
+#   - The script exits immediately if any command fails.
+#   - Ensure you have the GitHub CLI (`gh`) installed and authenticated.
+# =============================================================================
 set -e # Exit script if an error occurs
 
 COMMIT=$1
