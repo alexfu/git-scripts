@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Pulls latest and removes merged branches
-
-git pull && git purge-branches

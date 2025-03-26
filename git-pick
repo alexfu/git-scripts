@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Performs a fuzzy search selection on files in the index.
-# Powered by pick (https://github.com/thoughtbot/pick)
-
-git ls-files | pick
