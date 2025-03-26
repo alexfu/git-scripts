@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e # Exit script if an error occurs
+
+COMMIT=$1
+BASE="${2:-main}"
+BRANCH=$(whoami)/cherry-pick-$COMMIT
+
+# Ensure we have required information
+
+if [ -z "$COMMIT" ]; then
+  printf "Usage: git pr-from-commit <commit> [<base branch>]\n"
+  exit 1
+fi
+
+printf "🛠️ Creating temporary worktree..."
+TEMPDIR=$(dirname $(mktemp -u))
+WORKTREE=$TEMPDIR/$(basename $(pwd))-$BRANCH
+git worktree add $WORKTREE -b $BRANCH $BASE -q
+printf "done.\n"
+
+printf "📂 Changing directory to worktree..."
+PREVIOUS_DIR=$(pwd)
+cd $WORKTREE
+printf "done.\n"
+
+printf "🍒 Cherry picking commit $COMMIT\n"
+git cherry-pick $COMMIT
+
+printf "🚀 Pushing changes to $BASE and creating pull request\n"
+git push -q --set-upstream origin $BRANCH
+gh pr create --base $BASE
+printf "\n"
+
+printf "🧹 Cleaning up..."
+git worktree remove $WORKTREE
+printf "done.\n"
