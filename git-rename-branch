@@ -1,0 +1,12 @@
+#!/bin/bash
+# =============================================================================
+# Description:
+#   Renames the current Git branch to a new name provided as an argument.
+#   This script wraps the Git command "git branch -m" to offer an easy to 
+#   remember way to update your branch name.
+#
+# Usage:
+#   git rename-branch new-name
+# =============================================================================
+
+git branch -m $1
