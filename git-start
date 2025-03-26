@@ -1,0 +1,22 @@
+#!/bin/bash
+# =============================================================================#
+# Description:
+#   This script creates and checks out a new Git branch that's prefixed with
+#   your system username. It’s designed to help avoid branch naming conflicts
+#   in team environments by clearly associating your branches with your name.
+#
+# Usage:
+#   git start <branch-suffix> [<base-branch-or-commit>]
+#
+#   Example:
+#     git start new-feature main
+#
+#   If your username is "alex", the above command will create and check out:
+#     alex/new-feature based on the "main" branch.
+# =============================================================================
+
+BRANCH_NAME=$1
+BASE=$2
+USERNAME=$(whoami)
+
+git checkout -b $USERNAME/$BRANCH_NAME $BASE
