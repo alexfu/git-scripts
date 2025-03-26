@@ -1,5 +1,20 @@
 #!/bin/bash
+# =============================================================================
+# Description:
+#   Fetches updates from the remote repository and displays the commit log
+#   of new commits on the remote branch that aren’t present in your local branch.
+#   This gives you a quick peek at what’s new upstream.
+#
+# Usage:
+#   git peek
+# =============================================================================
 
-# Displays a list commits that are ahead on your current branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+MATCH=$(git ls-remote --heads origin $CURRENT_BRANCH)
 
-git fetch && git log HEAD..origin/$(git rev-parse --abbrev-ref HEAD)
+if [ -z "$MATCH" ]; then
+  echo "Error: Remote branch $CURRENT_BRANCH not found in your local origin copy. Either you haven't fetched updates or the branch hasn't been pushed to origin yet."
+  exit 1
+fi
+
+git fetch && git log HEAD..origin/$CURRENT_BRANCH
