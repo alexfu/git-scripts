@@ -1,0 +1,11 @@
+#!/bin/bash
+# =============================================================================
+# Description:
+#   Searches git history to find a deleted file (f-d-f) that matches user
+#   provided search string.
+#
+# Usage:
+#   git fdf <grep pattern>
+# =============================================================================
+
+git log --diff-filter=D --summary | awk '/^commit /{c=$2} /^ delete mode/{print c, $NF}' | grep $1
