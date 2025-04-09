@@ -21,10 +21,17 @@ COMMIT=$1
 BASE="${2:-main}"
 BRANCH=$(whoami)/cherry-pick-$COMMIT
 
+# Ensure we have GitHub CLI
+
+if ! command -v gh &> /dev/null; then
+  echo "Error: Unable to find gh command. Please make sure you have GitHub CLI installed!"
+  exit 1
+fi
+
 # Ensure we have required information
 
 if [ -z "$COMMIT" ]; then
-  printf "Usage: git pr-from-commit <commit> [<base branch>]\n"
+  echo "Usage: git pr-from-commit <commit> [<base branch>]"
   exit 1
 fi
 
